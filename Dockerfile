@@ -6,4 +6,4 @@ ENV PATH /pyenv/bin:$PATH
 RUN mkdir /pyenv \
  && chown user:nobody /pyenv \
  && su-exec user:nobody pyvenv-3.5 /pyenv \
- && su-exec user:nobody /pyenv/bin/pip install -U pip==9.0.1 setuptools==32.3.1
+ && su-exec user:nobody pip install -U pip==9.0.1 setuptools==32.3.1
