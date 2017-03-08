@@ -1,4 +1,4 @@
-FROM bwstitt/alpine:3.4
+FROM bwstitt/alpine:3.5
 
 ENV PATH /pyenv/bin:$PATH
 RUN docker-apk-install python3 \
