@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM python:2.7-alpine
 
 # linuxserver.io's images default to having abc user with gid/uid 911
 RUN addgroup -g 911 abc \
@@ -12,4 +12,5 @@ ADD pip.conf /etc/
 ENV PATH /pyenv/bin:$PATH
 RUN mkdir /pyenv \
  && chown abc:abc /pyenv \
- && su-exec abc python3.6 -m venv /pyenv
+ && pip install virtualenv==15.1.0 \
+ && su-exec abc python2.7 -m virtualenv /pyenv
