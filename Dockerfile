@@ -1,10 +1,15 @@
-FROM bwstitt/alpine:3.5
+FROM python:3.6-alpine
+
+# linuxserver.io's images default to having abc user with gid/uid 911
+RUN addgroup -g 911 abc \
+ && adduser -G abc -D -u 911 abc
+
+ADD docker-apk-install.sh /usr/local/sbin/docker-apk-install
+RUN docker-apk-install su-exec
+
+ADD pip.conf /etc/
 
 ENV PATH /pyenv/bin:$PATH
-RUN docker-apk-install python3 \
- && mkdir /pyenv \
+RUN mkdir /pyenv \
  && chown abc:abc /pyenv \
- && su-exec abc:abc pyvenv-3.5 /pyenv \
- && su-exec abc:abc pip install -U pip==9.0.1 setuptools==34.3.1
-
-# TODO: put no-cache-dir into pip.conf
+ && su-exec abc python3.6 -m venv /pyenv
